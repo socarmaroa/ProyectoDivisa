@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../template/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTbTasacambioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText 
+                        value="#{bundle.ViewTbTasacambioLabel_idTasacambio}"/>
+                    <h:outputText 
+                        value="#{tbTasacambioController.selected.idTasacambio}" 
+                        title="#{bundle.ViewTbTasacambioTitle_idTasacambio}"/>
+                    <h:outputText 
+                        value="#{bundle.ViewTbTasacambioLabel_fechaRegistro}"/>
+                    <h:outputText 
+                        value="#{tbTasacambioController.selected.fechaRegistro}" 
+                        title="#{bundle.ViewTbTasacambioTitle_fechaRegistro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+                    </h:outputText>
+                    <h:outputText 
+                        value="#{bundle.ViewTbTasacambioLabel_idTbDivisa1}"/>
+                    <h:outputText 
+                        value="#{tbTasacambioController.selected.idDivisa1.nombreDivisa}-#{tbTasacambioController.selected.idDivisa1.abreviaturaDivisa}" 
+                                  title="#{bundle.ViewTbTasacambioTitle_idTbDivisa1}"/>
+                    <h:outputText value="#{bundle.ViewTbTasacambioLabel_idTbDivisa2}"/>
+                    <h:outputText value="#{tbTasacambioController.selected.idDivisa2.nombreDivisa}-#{tbTasacambioController.selected.idDivisa2.abreviaturaDivisa}" 
+                                  title="#{bundle.ViewTbTasacambioTitle_idTbDivisa2}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tbTasacambioController.destroyAndView}" value="#{bundle.ViewTbTasacambioDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTbTasacambioEditLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="#{tbTasacambioController.prepareList}" value="#{bundle.ViewTbTasacambioShowAllLink}"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

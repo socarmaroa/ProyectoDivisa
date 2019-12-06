@@ -1,0 +1,207 @@
+.Form {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
+
+.Form-title {
+    color: #00386a;
+    margin: 0 0 15px;  
+}
+
+.Form-description {
+    color:#423e3d;
+}
+
+.Form-fields {
+    border-radius: 15px;
+    border: 1px solid #c5c1c0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.Control-label {
+    color: #423e3d;
+    font-weight: bold;
+    transition: color 300ms ease;
+}
+
+.Control-requirements {
+    background: pink;
+    border-top: none;
+    margin: -14px 0 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 200ms ease;
+    padding: 0 9px;
+}
+
+.ControlInput {
+    width: 250px;
+    border-radius: 3px;
+    color: #6d6665;
+    margin: 0.8em 0;
+    border: 1px solid #c5c1c0;
+    padding: 0.6em 0.6em;
+    transition: box-shadow 300ms ease-out;
+}
+.MessagesError{
+    color:red;
+    margin:8px;
+}
+
+
+.Control-requirements--usuario,
+.ControlInput--usuario {
+    order: -1;
+}
+
+.Control-label--usuario{
+    order: -2;
+}
+
+.ControlInput--password {
+    order: 0;
+    /*padding-right: 50px;*/
+}
+
+.Control-label--password {
+    order: -1;
+    margin-bottom: -32px;
+}
+.Control-label--showPassword {
+    width: 32px;
+    position: relative;
+    top: 52px;
+    left: 100%;
+    text-align: right;
+    margin-left: -36px;
+
+}
+
+.Button {
+    background-color: #D59B32;
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.Form-submit {
+    border: 1px solid #e7542b;
+    background-color: #D59B32;
+    color: white;
+    border-radius: 3px;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.Form-submit:hover{
+    border: 1px solid #fff;
+    background-color:#206237;
+    color: #e7542b;
+}
+
+/*//SVG*/
+.Button-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -13px;
+    margin-top: -13px;
+    opacity: 0;
+}
+/*// show password checkbox hack*/
+.show-password {
+    display: none;
+
+    &:checked {
+        /*// background: purple;*/
+
+        & ~ .ControlInput--password {
+            /*text-security: disc;*/
+            -webkit-text-security: disc;
+            -moz-text-security: disc;
+        }
+
+        & ~ .Control-label--showPassword {
+            .svg-toggle-password {
+
+                .closed-eye {
+                    opacity: 1;
+                    transition: opacity 300ms ease, height 400ms ease;
+                    width: 4px;
+                    height: 44px;
+                }
+            }
+        }
+    }
+}
+/*// default eye position*/
+.svg-toggle-password {
+    /*fill: rgba(#008ed6, 50%);*/
+
+    .closed-eye {
+        opacity: 0;
+        height: 0;
+    }
+}
+
+
+
+
+.spinner {
+    animation: dash 2s linear infinite;
+    animation-direction: normal;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 150.6 100.4;
+    }
+    50% {
+        stroke-dasharray: 1 250;
+    }
+    100% {
+        stroke-dashoffset: 502;
+        stroke-dasharray: 150.6 100.4;
+    }
+}
+
+@keyframes spinner-in {
+    0% {
+        opacity: 0;
+    }
+    20%, 80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+body {
+    background-color: #cccccc;
+    display: flex;  
+    min-height: 100%;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}

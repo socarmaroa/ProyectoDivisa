@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../template/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTbCotizacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTbCotizacionEmpty}" rendered="#{tbCotizacionController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tbCotizacionController.items.rowCount > 0}">
+                    <h:outputText value="#{tbCotizacionController.pagination.pageFirstItem + 1}..#{tbCotizacionController.pagination.pageLastItem + 1}/#{tbCotizacionController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tbCotizacionController.previous}" value="#{bundle.Previous} #{tbCotizacionController.pagination.pageSize}" rendered="#{tbCotizacionController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tbCotizacionController.next}" value="#{bundle.Next} #{tbCotizacionController.pagination.pageSize}" rendered="#{tbCotizacionController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tbCotizacionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_idCotizacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCotizacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_fechaRegistro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaRegistro}">
+                                <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_valor}"/>
+                            </f:facet>
+                            <h:outputText value=" #{item.idValortasacambio.idTasacambio.idDivisa1.abreviaturaDivisa} "/>
+                            <h:outputText value="#{item.valor}">
+                                <f:convertNumber currencySymbol="#{item.idValortasacambio.idTasacambio.idDivisa1.abreviaturaDivisa}"
+                                                 groupingUsed="true"
+                                                 maxFractionDigits="3"/>
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_cambiarA}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idValortasacambio.idTasacambio.idDivisa2.nombreDivisa}-"/>
+                            <h:outputText value="#{item.idValortasacambio.idTasacambio.idDivisa2.abreviaturaDivisa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_totalCotizado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idValortasacambio.valortasacambio * item.valor}">
+                                <f:convertNumber  maxFractionDigits="3"/>
+                            </h:outputText>
+                            <h:outputText value=" #{item.idValortasacambio.idTasacambio.idDivisa2.abreviaturaDivisa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_TbTasacambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idValortasacambio.idTasacambio.idDivisa1.nombreDivisa}-"/>
+                            <h:outputText value="#{item.idValortasacambio.idTasacambio.idDivisa1.abreviaturaDivisa}/"/>
+                            <h:outputText value="#{item.idValortasacambio.idTasacambio.idDivisa2.nombreDivisa}-"/>
+                            <h:outputText value="#{item.idValortasacambio.idTasacambio.idDivisa2.abreviaturaDivisa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_valortasacambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idValortasacambio.valortasacambio}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTbCotizacionTitle_fechatasacambio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idValortasacambio.fechaValortasacambio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tbCotizacionController.prepareView}" value="#{bundle.ListTbCotizacionViewLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

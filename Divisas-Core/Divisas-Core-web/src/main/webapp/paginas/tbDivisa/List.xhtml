@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../template/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDivisaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListDivisaEmpty}" rendered="#{tbTbDivisaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tbTbDivisaController.items.rowCount > 0}">
+                    <h:outputText value="#{tbTbDivisaController.pagination.pageFirstItem + 1}..#{tbTbDivisaController.pagination.pageLastItem + 1}/#{tbTbDivisaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tbTbDivisaController.previous}" value="#{bundle.Previous} #{tbTbDivisaController.pagination.pageSize}" rendered="#{tbTbDivisaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tbTbDivisaController.next}" value="#{bundle.Next} #{tbTbDivisaController.pagination.pageSize}" rendered="#{tbTbDivisaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tbTbDivisaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDivisaTitle_idTbDivisa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDivisa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDivisaTitle_nombreTbDivisa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreDivisa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDivisaTitle_abreviaturaTbDivisa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.abreviaturaDivisa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDivisaTitle_activa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.activa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDivisaTitle_fechaRegistro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaRegistro}">
+                                <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tbTbDivisaController.prepareView}" value="#{bundle.ListDivisaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tbTbDivisaController.prepareEdit}" value="#{bundle.ListDivisaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tbTbDivisaController.destroy}" value="#{bundle.ListDivisaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tbTbDivisaController.prepareCreate}" value="#{bundle.ListDivisaCreateLink}"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

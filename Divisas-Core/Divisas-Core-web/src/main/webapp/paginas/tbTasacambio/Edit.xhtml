@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../template/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTbTasacambioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTbTasacambioLabel_fechaRegistro}" for="fechaRegistro" />
+                    <h:outputText id="fechaRegistro" 
+                                 value="#{tbTasacambioController.selected.fechaRegistro}" 
+                                >
+                        <f:convertDateTime pattern="dd/MM/yyyy hh:mm:ss" />
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.EditTbTasacambioLabel_idTbDivisa1}" for="idTbDivisa1" />
+                    <h:selectOneMenu id="idTbDivisa1" value="#{tbTasacambioController.selected.idDivisa1}" 
+                                     title="#{bundle.EditTbTasacambioTitle_idTbDivisa1}" 
+                                     required="true" 
+                                     requiredMessage="#{bundle.EditTbTasacambioRequiredMessage_idTbDivisa1}">
+                        <f:selectItems value="#{tbTbDivisaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditTbTasacambioLabel_idTbDivisa2}" for="idTbDivisa2" />
+                    <h:selectOneMenu id="idTbDivisa2" 
+                                     value="#{tbTasacambioController.selected.idDivisa2}" 
+                                     title="#{bundle.EditTbTasacambioTitle_idTbDivisa2}" 
+                                     required="true" 
+                                     requiredMessage="#{bundle.EditTbTasacambioRequiredMessage_idTbDivisa2}">
+                        <f:selectItems value="#{tbTbDivisaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{tbTasacambioController.update}" value="#{bundle.EditTbTasacambioSaveLink}"/>
+                <br />
+                <br />
+                <h:commandLink action="#{tbTasacambioController.prepareList}" value="#{bundle.EditTbTasacambioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
